@@ -19,6 +19,8 @@ Bangumi组件似乎不能使用`@require`导入外部脚本，针对这个问题
 这里采用了`$.getScript`的方式加载以来的commonmark和html-escaper脚本，
 适配的脚本后缀为`bgm.user.js`。
 
+`commonmark.min.js`的cdn改为使用unpkg，加载速度可能更快一些。
+
 ## 相关链接
 
 - [markdown端预览效果](https://github.com/furtherun/bangumi-blog-markdown-desktop/blob/main/test/article.md)

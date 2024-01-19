@@ -9,8 +9,8 @@
 // @match        http*://bangumi.tv/blog/*/edit
 // ==/UserScript==
 
-$.getScript('https://cdn.jsdelivr.net/npm/html-escaper@3.0.3/index.min.js', function () {
-    $.getScript('https://cdn.jsdelivr.net/npm/commonmark@0.29.3/dist/commonmark.min.js', function () {
+$.getScript('https://unpkg.com/html-escaper@3.0.3/min.js', function () {
+    $.getScript('https://unpkg.com/commonmark@0.29.3/dist/commonmark.min.js', function () {
         var Renderer = commonmark.Renderer;
         var Parser = commonmark.Parser;
         var htmlescape = html.escape;
