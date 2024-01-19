@@ -369,40 +369,42 @@ BBCodeRenderer.prototype.attrs = attrs;
 
 $(function () {
     var bbTextarea = $('#tpc_content');
-    var mdTextarea = $('<textarea>', {
-        id: 'tpc_md_content',
-        name: 'md_content',
-        cols: '45',
-        rows: '15',
-        css: {
-            width: '550px'
-        },
-        placeholder: "请将markdown源代码粘贴在这里……\n\n点击工具栏“md2bb”按钮进行格式转换，转换结果自动替换到编辑区。",
-        class: "quick newBlogEntry loadEditor markItUpEditor valid"
-    }).insertAfter(bbTextarea);
+    var mdTextarea = $('#tpc_md_content');
 
-    var md2bb_btn = $('<a>', {
-        text: 'md2bb',
-        title: '将markdown转换为bbcode',
-        css: {
-            cursor: 'pointer'
-        },
-        click: function (event) {
-            event.preventDefault();
-            var markdown = mdTextarea.val();
-            // console.log(markdown);
+    if (mdTextarea.length === 0) {
+        mdTextarea = $('<textarea>', {
+            id: 'tpc_md_content',
+            name: 'md_content',
+            cols: '45',
+            rows: '15',
+            css: {
+                width: '550px'
+            },
+            placeholder: "请将markdown源代码粘贴在这里……\n\n点击工具栏“md2bb”按钮进行格式转换，转换结果自动替换到编辑区。",
+            class: "quick newBlogEntry loadEditor markItUpEditor valid"
+        }).insertAfter(bbTextarea);
+    }
 
-            var reader = new Parser();
-            var parsed = reader.parse(markdown);
+    if ($('.md2bb_btn').length === 0) {
+        var md2bb_btn = $('<a>', {
+            text: 'md2bb',
+            title: '将markdown转换为bbcode',
+            css: {
+                cursor: 'pointer'
+            },
+            click: function (event) {
+                event.preventDefault();
+                var markdown = mdTextarea.val();
 
-            var writer = new BBCodeRenderer({ softbreak: '' });
-            var result = writer.render(parsed);
-            // console.log(result);
+                var reader = new commonmark.Parser();
+                var writer = new BBCodeRenderer({ softbreak: '' });
+                var parsed = reader.parse(markdown);
+                var result = writer.render(parsed);
 
-            bbTextarea.val(result);
-        }
-    });
+                bbTextarea.val(result);
+            }
+        }).addClass('md2bb_btn');
 
-    var li = $('<li>').append(md2bb_btn);
-    $('.markItUpHeader').append(li);
+        $('<li>').append(md2bb_btn).appendTo('.markItUpHeader');
+    }
 });

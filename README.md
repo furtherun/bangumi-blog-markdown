@@ -2,6 +2,8 @@
 
 想在本地使用[点这里](https://github.com/furtherun/bangumi-blog-markdown-desktop)！
 
+## 功能
+
 在日志编辑页面增加Markdown一键转换为Bangumi BBCode的功能（蓝色方框）。
 将写好的markdown源代码复制到下方输入区（橙色方框）中，点击“md2bb”按钮即可。
 
@@ -13,18 +15,24 @@
 
 ![转换效果](images/after.png)
 
+Bangumi组件似乎不能使用`@require`导入外部脚本，针对这个问题，
+这里采用了`$.getScript`的方式加载以来的commonmark和html-escaper脚本，
+适配的脚本后缀为`bgm.user.js`。
+
 ## 相关链接
 
 - [markdown端预览效果](https://github.com/furtherun/bangumi-blog-markdown-desktop/blob/main/test/article.md)
 - [bbcode的预览效果](https://bgm.tv/blog/330695)
-- [markdown文本源码](https://github.com/furtherun/bangumi-blog-markdown-desktop/blob/main/test/article.md)
-- [bbcode转换结果](https://github.com/furtherun/bangumi-blog-markdown-desktop/blob/main/test/article.bb.md)
+- [案例markdown文本源码](https://github.com/furtherun/bangumi-blog-markdown-desktop/blob/main/test/article.md)
+- [案例bbcode转换结果](https://github.com/furtherun/bangumi-blog-markdown-desktop/blob/main/test/article.bb.md)
 
-## 外部依赖
+## 外部依赖参考
 
 ```js
 // @require 	 https://cdn.jsdelivr.net/npm/html-escaper@3.0.3/index.min.js
 // @require      https://cdn.jsdelivr.net/npm/commonmark@0.29.3/dist/commonmark.min.js
+// @require      https://unpkg.com/html-escaper@3.0.3/min.js
+// @require      https://unpkg.com/commonmark@0.29.3/dist/commonmark.min.js
 ```
 
 ## 参考项目
