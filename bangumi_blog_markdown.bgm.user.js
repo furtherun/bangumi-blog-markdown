@@ -4,9 +4,9 @@
 // @description  Markdown编辑器书写，Bangumi日志自动排版。
 // @version      0.0.1
 // @author       furtherun
-// @match        http*://bgm.tv/blog/*/edit
-// @match        http*://chii.in/blog/*/edit
-// @match        http*://bangumi.tv/blog/*/edit
+// @match        http*://bgm.tv/blog/*
+// @match        http*://chii.in/blog/*
+// @match        http*://bangumi.tv/blog/*
 // ==/UserScript==
 
 $.getScript('https://unpkg.com/html-escaper@3.0.3/min.js', function () {
