@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Bangumi日志，Markdown书写
+// @name         Bangumi 日志，Markdown 书写
 // @namespace    https://github.com/furtherun/bangumi-blog-markdown
-// @description  Markdown编辑器书写，Bangumi日志自动排版。
+// @description  Markdown 编辑器书写，Bangumi 日志自动排版。
 // @version      0.0.1
 // @author       furtherun
 // @match        http*://bgm.tv/blog/*
@@ -52,7 +52,7 @@ function tag(name, attrs, selfclosing) {
 
 function BBCodeRenderer(options) {
     options = options || {};
-    // 如果softbreak没有设置或者不是string，将其设置为默认值"\n"
+    // 如果 softbreak 没有设置或者不是 string，将其设置为默认值"\n"
     options.softbreak = typeof options.softbreak === 'string' ? options.softbreak : "\n";
     options.newline_after_heading = options.newline_after_heading || true;
     this.esc = options.esc || htmlescape;
@@ -64,7 +64,7 @@ function BBCodeRenderer(options) {
 /* Node methods */
 
 function text(node) {
-    // 删除线，并非commonmark标准，采用自定义的方式实现
+    // 删除线，并非 commonmark 标准，采用自定义的方式实现
     // ~~strikethrough~~
     // str~~iketh~~rough
     var content = node.literal;
@@ -96,9 +96,9 @@ function link(node, entering) {
     }
 }
 
-// 图片，bbcode的图片和html的图片处理区别较大，html的image alt固定放在标签中间不显示，
-// 而这里似乎不能删掉image alt，所以计划把image alt显示在图片上面，image alt是可选项。
-// title是鼠标悬浮图片时的提示信息，必须用双引号包裹，也是可选项，bbcode中直接舍弃。
+// 图片，bbcode 的图片和 html 的图片处理区别较大，html 的 image alt 固定放在标签中间不显示，
+// 而这里似乎不能删掉 image alt，所以计划把 image alt 显示在图片上面，image alt 是可选项。
+// title 是鼠标悬浮图片时的提示信息，必须用双引号包裹，也是可选项，bbcode 中直接舍弃。
 // ![image alt](link "title")
 function image(node, entering) {
     if (entering) {
@@ -148,7 +148,7 @@ function paragraph(node, entering) {
     }
 }
 
-// 标题，一级标题24，二级标题22，三级标题20，正文16
+// 标题，一级标题 24，二级标题 22，三级标题 20，正文 16
 // # heading 1
 // ## heading 2
 // ### heading 3
@@ -205,7 +205,7 @@ function code_block(node) {
     // }
 }
 
-// 三种分割线，使用75个“_”进行模拟
+// 三种分割线，使用 75 个“_”进行模拟
 // ---
 // ***
 // ___
@@ -269,7 +269,7 @@ function html_inline(node) {
     } else {
         var content = node.literal;
         // 添加新的替换规则
-        content = content.replace(/<!--[\s\S]*?-->/g, ''); // html注释
+        content = content.replace(/<!--[\s\S]*?-->/g, ''); // html 注释
         content = content.replace(/<mask>/g, "[mask]").replace(/\s*<\/mask>/g, "[/mask]");
         content = content.replace(/<u>/g, "[u]").replace(/<\/u>/g, "[/u]");
         this.lit(content);
@@ -282,13 +282,13 @@ function html_block(node) {
         this.lit("<!-- raw HTML omitted -->");
     } else {
         var content = node.literal;
-        content = content.replace(/<!--[\s\S]*?-->/g, ''); // html注释
-        // 修改正则表达式，使其能够匹配没有summary标签的details元素
+        content = content.replace(/<!--[\s\S]*?-->/g, ''); // html 注释
+        // 修改正则表达式，使其能够匹配没有 summary 标签的 details 元素
         var detailsPattern = /<details>\s*(?:<summary>([\s\S]*?)<\/summary>)?\s*([\s\S]*?)<\/details>/g;
         var replacedContent = content.replace(detailsPattern, function (match, summary, text) {
-            summary = summary || ''; // 如果summary不存在，将其设置为空字符串
+            summary = summary || ''; // 如果 summary 不存在，将其设置为空字符串
             var separator = summary.endsWith('  ') ? '\n' : ' ';
-            // details中的换行
+            // details 中的换行
             text = text.replace(/[\t\n\r\f\v]+/g, ' ').replace(/ {2,}/g, '\n').replace(/ /g, '');
             return `\n[color=yellowgreen]${summary.trim()}[/color]${separator}[mask]${text.trim()}[/mask]\n`;
         });
@@ -380,7 +380,7 @@ $(function () {
             css: {
                 width: '550px'
             },
-            placeholder: "请将markdown源代码粘贴在这里……\n\n点击工具栏“md2bb”按钮进行格式转换，转换结果自动替换到编辑区。",
+            placeholder: "请将 markdown 源代码粘贴在这里……\n\n点击工具栏“md2bb”按钮进行格式转换，转换结果自动替换到编辑区。",
             class: "quick newBlogEntry loadEditor markItUpEditor valid"
         }).insertAfter(bbTextarea);
     }
@@ -388,7 +388,7 @@ $(function () {
     if ($('.md2bb_btn').length === 0) {
         var md2bb_btn = $('<a>', {
             text: 'md2bb',
-            title: '将markdown转换为bbcode',
+            title: '将 markdown 转换为 bbcode',
             css: {
                 cursor: 'pointer'
             },
